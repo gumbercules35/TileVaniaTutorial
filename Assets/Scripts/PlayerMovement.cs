@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D playerBody;   
+    private CapsuleCollider2D playerCollider;
     private SpriteRenderer playerSprite;
 
     private Animator playerAnimator;
@@ -23,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
         playerAnimator = gameObject.GetComponent<Animator>();
-       
+        playerCollider = gameObject.GetComponent<CapsuleCollider2D>();
     }
     void Start()
     {
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         isMovingY = Mathf.Abs(playerBody.velocity.y) > Mathf.Epsilon;
         Run();
         FlipSprite();
+        Climb();
     }
 
     private void OnMove(InputValue value){
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump(InputValue value){
         
-        if (value.isPressed && playerBody.IsTouchingLayers(LayerMask.GetMask("Platforms"))){
+        if (value.isPressed && playerCollider.IsTouchingLayers(LayerMask.GetMask("Platforms"))){
             playerBody.velocity += new Vector2(0f, jumpSpeed);
         }
     }
@@ -57,6 +59,18 @@ public class PlayerMovement : MonoBehaviour
         playerBody.velocity = playerVelocity;
 
         playerAnimator.SetBool("isRunning", isMovingX);
+    }
+
+    private void Climb(){
+        if(playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
+        {
+        playerBody.gravityScale = 0;
+        playerBody.velocity = new Vector2(playerBody.velocity.x, moveInput.y * moveSpeed);
+        playerAnimator.SetBool("isClimbing", true);
+        }else {
+            playerAnimator.SetBool("isClimbing", false);
+            playerBody.gravityScale = 1;
+        }
     }
 
     private void FlipSprite(){
