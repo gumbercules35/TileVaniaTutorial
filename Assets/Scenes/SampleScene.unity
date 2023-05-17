@@ -351,6 +351,23 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &446758895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5838804368710716949, guid: ac1eb82550a8be24783caa0e57840822, type: 3}
+  m_PrefabInstance: {fileID: 5838804367352817880}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &446758902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446758895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b1c8ec13c0b7c489afb013680cca90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,21 +3058,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4080640671162788786, guid: ac1eb82550a8be24783caa0e57840822, type: 3}
-      propertyPath: m_Size.x
-      value: 0.44
-      objectReference: {fileID: 0}
-    - target: {fileID: -4080640671162788786, guid: ac1eb82550a8be24783caa0e57840822, type: 3}
-      propertyPath: m_Size.y
-      value: 0.82
-      objectReference: {fileID: 0}
-    - target: {fileID: -4080640671162788786, guid: ac1eb82550a8be24783caa0e57840822, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: -4080640671162788786, guid: ac1eb82550a8be24783caa0e57840822, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.12
+    - target: {fileID: -3770534316331047685, guid: ac1eb82550a8be24783caa0e57840822, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard&Mouse
       objectReference: {fileID: 0}
     - target: {fileID: 5838804368710716936, guid: ac1eb82550a8be24783caa0e57840822, type: 3}
       propertyPath: m_RootOrder
