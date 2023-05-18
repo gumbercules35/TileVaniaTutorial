@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D playerBody;   
-    private CapsuleCollider2D playerCollider;
-    private SpriteRenderer playerSprite;
+    private CapsuleCollider2D playerBodyCollider;
+    private BoxCollider2D playerFeetCollider;    private SpriteRenderer playerSprite;
     private Animator playerAnimator;    
     private Vector2 moveInput;
     private float climbAnimationSpeed = 1f;
@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
         playerAnimator = gameObject.GetComponent<Animator>();
-        playerCollider = gameObject.GetComponent<CapsuleCollider2D>();
+        playerBodyCollider = gameObject.GetComponent<CapsuleCollider2D>();
+        playerFeetCollider = gameObject.GetComponent<BoxCollider2D>();
     }
     void Start()
     {
@@ -41,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnJump(InputValue value){        
-        if (value.isPressed && playerCollider.IsTouchingLayers(LayerMask.GetMask("Platforms"))){
+        if (value.isPressed && playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Platforms"))){
            
             playerBody.velocity += new Vector2(0f, jumpSpeed);
            
@@ -58,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Climb(){
         bool isMovingY = Mathf.Abs(playerBody.velocity.y) > Mathf.Epsilon;
-        if(playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
+        if(playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
             
             playerBody.velocity = new Vector2(playerBody.velocity.x, moveInput.y * moveSpeed);
