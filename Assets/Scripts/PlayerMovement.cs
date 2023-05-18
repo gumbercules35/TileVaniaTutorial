@@ -16,12 +16,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private float moveSpeed = 5f;
     [SerializeField] private float jumpSpeed = 2f;
     
+    private bool isAlive = true;
     private void Awake() {
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
         playerAnimator = gameObject.GetComponent<Animator>();
         playerBodyCollider = gameObject.GetComponent<CapsuleCollider2D>();
-        playerFeetCollider = gameObject.GetComponent<BoxCollider2D>();
+        playerFeetCollider = gameObject.GetComponentInChildren<BoxCollider2D>();
     }
     void Start()
     {
@@ -31,23 +32,26 @@ public class PlayerMovement : MonoBehaviour
  
     void Update()
     {
-        // Check if the player has Any x velocity (+ve or -ve ) greater than effectively 0              
+       if (!isAlive){ return;}
+
         Run();
         FlipSprite();
         Climb();
+        Die();
+             
     }
 
     private void OnMove(InputValue value){
+        if(!isAlive){ return;}
          moveInput = value.Get<Vector2>();
+        
     }
 
-    private void OnJump(InputValue value){        
-        if (value.isPressed && playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Platforms"))){
-           
-            playerBody.velocity += new Vector2(0f, jumpSpeed);
-           
-        }
-        //
+    private void OnJump(InputValue value){      
+        if(!isAlive){ return; }
+            if (value.isPressed && playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Platforms"))){            
+                playerBody.velocity += new Vector2(0f, jumpSpeed);            
+            }       
     }
 
     private void Run(){
@@ -91,6 +95,17 @@ public class PlayerMovement : MonoBehaviour
         //     playerSprite.flipX = false;
         // }
         // This method of flipping the sprite can have weird effects when the object contains child sprites
+    }
+
+    private void Die() {
+
+        if (playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        {
+        playerAnimator.SetTrigger("Death");
+        playerBodyCollider.enabled = false;
+        
+        isAlive = false;
+        }
     }
 
 
