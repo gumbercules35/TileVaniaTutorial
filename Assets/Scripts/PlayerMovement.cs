@@ -42,8 +42,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump(InputValue value){        
         if (value.isPressed && playerCollider.IsTouchingLayers(LayerMask.GetMask("Platforms"))){
+           
             playerBody.velocity += new Vector2(0f, jumpSpeed);
+           
         }
+        //
     }
 
     private void Run(){
@@ -57,13 +60,15 @@ public class PlayerMovement : MonoBehaviour
         bool isMovingY = Mathf.Abs(playerBody.velocity.y) > Mathf.Epsilon;
         if(playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
-            playerBody.gravityScale = 0;
+            
             playerBody.velocity = new Vector2(playerBody.velocity.x, moveInput.y * moveSpeed);
             if (isMovingY){
                 playerAnimator.SetFloat("climbSpeed", climbAnimationSpeed);
                 playerAnimator.SetBool("isClimbing", true);
+                playerBody.gravityScale = 2;
             } else {
-                playerAnimator.SetFloat("climbSpeed", 0f);               
+                playerAnimator.SetFloat("climbSpeed", 0f);
+                playerBody.gravityScale = 0;               
             }
            
         }else {
