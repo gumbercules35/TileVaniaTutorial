@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         playerBodyCollider = gameObject.GetComponent<CapsuleCollider2D>();
         playerFeetCollider = gameObject.GetComponentInChildren<BoxCollider2D>();
         bulletSpawn = gameObject.transform.GetChild(1).localPosition;
-        Debug.Log(bulletSpawn);
+        
 
         // Dealing with unknown Index of transform
         // Transform[] transformsArray = gameObject.GetComponentsInChildren<Transform>();

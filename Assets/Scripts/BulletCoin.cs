@@ -15,7 +15,7 @@ public class BulletCoin : MonoBehaviour
         bulletCollider = gameObject.GetComponent<CircleCollider2D>(); 
         bulletBody = gameObject.GetComponent<Rigidbody2D>();
         player = FindObjectOfType<PlayerMovement>();
-        Debug.Log(player);
+      
         
     }
     void Start()
