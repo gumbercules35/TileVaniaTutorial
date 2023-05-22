@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Die() {
 
-        if (playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        if (playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Spikes")))
         {
         playerAnimator.SetTrigger("Death");
         playerBodyCollider.enabled = false;
