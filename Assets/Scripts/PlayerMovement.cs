@@ -13,13 +13,14 @@ public class PlayerMovement : MonoBehaviour
     private float climbAnimationSpeed = 1f;
 
     [Header("Velocity Values")]
-    [SerializeField]private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpSpeed = 2f;
     
     private bool isAlive = true;
     private void Awake() {
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
+        playerSprite.color = Color.white;
         playerAnimator = gameObject.GetComponent<Animator>();
         playerBodyCollider = gameObject.GetComponent<CapsuleCollider2D>();
         playerFeetCollider = gameObject.GetComponentInChildren<BoxCollider2D>();
@@ -103,6 +104,9 @@ public class PlayerMovement : MonoBehaviour
         {
         playerAnimator.SetTrigger("Death");
         playerBodyCollider.enabled = false;
+        playerBody.velocity = new Vector2(0f, jumpSpeed / 1.5f);
+        playerSprite.color = Color.red;          
+
         
         isAlive = false;
         }
