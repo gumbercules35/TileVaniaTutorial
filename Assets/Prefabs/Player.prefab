@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b1c8ec13c0b7c489afb013680cca90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletCoin: {fileID: 3239244130301110456, guid: 915aef7aecc4e774088fe7e5b8470ef8, type: 3}
   moveSpeed: 5
   jumpSpeed: 12.5
 --- !u!1 &6198248883888776304

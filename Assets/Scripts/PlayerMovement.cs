@@ -7,7 +7,12 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D playerBody;   
     private CapsuleCollider2D playerBodyCollider;
-    private BoxCollider2D playerFeetCollider;    private SpriteRenderer playerSprite;
+    private BoxCollider2D playerFeetCollider;    
+    private SpriteRenderer playerSprite;
+
+    private Vector3 bulletSpawn;
+    [SerializeField] private GameObject bulletCoin;
+    
     private Animator playerAnimator;    
     private Vector2 moveInput;
     private float climbAnimationSpeed = 1f;
@@ -18,12 +23,24 @@ public class PlayerMovement : MonoBehaviour
     
     private bool isAlive = true;
     private void Awake() {
+
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
         playerSprite.color = Color.white;
         playerAnimator = gameObject.GetComponent<Animator>();
         playerBodyCollider = gameObject.GetComponent<CapsuleCollider2D>();
         playerFeetCollider = gameObject.GetComponentInChildren<BoxCollider2D>();
+        bulletSpawn = gameObject.transform.GetChild(1).localPosition;
+        Debug.Log(bulletSpawn);
+
+        // Dealing with unknown Index of transform
+        // Transform[] transformsArray = gameObject.GetComponentsInChildren<Transform>();
+        // foreach (var transform in transformsArray)
+        // {
+        // Debug.Log(transform);
+            
+        // }
+
     }
     void Start()
     {
@@ -109,6 +126,15 @@ public class PlayerMovement : MonoBehaviour
 
         
         isAlive = false;
+        }
+    }
+
+    private void OnFire(){
+        if (isAlive){
+        Vector3 spawnLocation = new Vector3(transform.localPosition.x + bulletSpawn.x, transform.localPosition.y + bulletSpawn.y, 0f);
+        Instantiate(bulletCoin, spawnLocation, new Quaternion());        
+        } else {
+            return;
         }
     }
 
