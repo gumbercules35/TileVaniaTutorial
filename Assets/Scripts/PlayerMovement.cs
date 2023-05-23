@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnFire(){
         
-        if (isAlive && sessionManager.HasAmmo()){
+        if (isAlive && sessionManager.HasAmmo() && !isExiting){
             Vector3 spawnLocation = new Vector3(transform.localPosition.x + bulletSpawn.x, transform.localPosition.y + bulletSpawn.y, 0f);
             Instantiate(bulletCoin, spawnLocation, new Quaternion());
             sessionManager.DecrementAmmo();        

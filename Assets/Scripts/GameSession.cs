@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameSession : MonoBehaviour
 {   
     [SerializeField] private int playerLives = 3;
     [SerializeField] private int ammoRemaining;
+    private int totalScore;
+    [SerializeField] private TextMeshProUGUI livesText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI ammoText;
 
     private float deathDelay = 2.5f;
 
@@ -24,6 +29,13 @@ public class GameSession : MonoBehaviour
             Debug.Log("Total Ammo: " + ammoRemaining);
         }
     }
+
+    private void Start() {
+        livesText.text = "Lives:" + playerLives.ToString();
+        scoreText.text = "Score:" + totalScore.ToString();
+        ammoText.text = "Ammo:" + ammoRemaining.ToString();
+        
+    }
    public IEnumerator ProcessPlayerDeath(){
         yield return new WaitForSecondsRealtime(deathDelay);
         if (playerLives > 1) {
@@ -36,6 +48,7 @@ public class GameSession : MonoBehaviour
 
    private void TakeLifeAndReload(){
     playerLives --;
+    livesText.text = "Lives:" + playerLives.ToString();
     if (playerLives <= 0){
         ResetGameSession();
     } else {
@@ -52,12 +65,16 @@ public class GameSession : MonoBehaviour
     Destroy(gameObject);
    }
 
-   public void IncrementAmmo () {
-    ammoRemaining ++;    
+   public void IncrementAmmoAndScore (int ammoValue, int scoreValue) {
+    ammoRemaining += ammoValue;   
+    ammoText.text = "Ammo:" + ammoRemaining.ToString();
+    totalScore += scoreValue;
+    scoreText.text = "Score:" + totalScore.ToString(); 
    }
 
    public void DecrementAmmo (){
-    ammoRemaining --;    
+    ammoRemaining --;   
+    ammoText.text = "Ammo:" + ammoRemaining.ToString(); 
    }
 
    public bool HasAmmo (){
