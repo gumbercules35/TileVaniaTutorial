@@ -14,12 +14,13 @@ public class BulletCoin : MonoBehaviour
     private void Awake() {
         bulletCollider = gameObject.GetComponent<CircleCollider2D>(); 
         bulletBody = gameObject.GetComponent<Rigidbody2D>();
-        player = FindObjectOfType<PlayerMovement>();
+       
       
         
     }
     void Start()
-    {  float bulletSpeed = 10f * player.transform.localScale.x;
+    {   player = FindObjectOfType<PlayerMovement>();
+        float bulletSpeed = 10f * player.transform.localScale.x;
        bulletBody.velocity = new Vector2( bulletSpeed, 2.5f);
     }
 

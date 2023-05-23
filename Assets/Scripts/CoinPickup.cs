@@ -10,7 +10,7 @@ public class CoinPickup : MonoBehaviour
 
     private bool hasTriggered = false;
 
-    private void Awake() {
+    private void Start() {
         coinValue = Random.Range(10,100);
         ammoValue = coinValue / 10;
         

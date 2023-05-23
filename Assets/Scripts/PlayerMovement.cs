@@ -26,16 +26,16 @@ public class PlayerMovement : MonoBehaviour
     private bool isAlive = true;
     private bool isExiting = false;
     private void Awake() {
-        //Storing a reference to the GameSession here with FindObjectOfType leads to weird errors, this seems to fix it
-        sessionManager = GameObject.FindWithTag("GameController").GetComponent<GameSession>();
+       
+        
         
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
-        playerSprite.color = Color.white;
+        
         playerAnimator = gameObject.GetComponent<Animator>();
         playerBodyCollider = gameObject.GetComponent<CapsuleCollider2D>();
         playerFeetCollider = gameObject.GetComponentInChildren<BoxCollider2D>();
-        bulletSpawn = gameObject.transform.GetChild(1).localPosition;
+        
         
 
         // Dealing with unknown Index of transform
@@ -49,7 +49,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void Start()
     {
-        
+        //References to external objects should occur in start NOT awake
+        sessionManager = GameObject.FindWithTag("GameController").GetComponent<GameSession>();
+        playerSprite.color = Color.white;
+        bulletSpawn = gameObject.transform.GetChild(1).localPosition;
     }
 
  
