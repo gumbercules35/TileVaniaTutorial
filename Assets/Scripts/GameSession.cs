@@ -15,7 +15,9 @@ public class GameSession : MonoBehaviour
 
     private float deathDelay = 2.5f;
 
-
+    //DEBUG VARIABLES
+    
+    //DEBUG VARIABLES
     private void Awake() {
         //Find out how many gameSessions we currently have
         int gameSessionCount = FindObjectsOfType<GameSession>().Length;
@@ -70,6 +72,8 @@ public class GameSession : MonoBehaviour
     ammoText.text = "Ammo:" + ammoRemaining.ToString();
     totalScore += scoreValue;
     scoreText.text = "Score:" + totalScore.ToString(); 
+
+    
    }
 
    public void DecrementAmmo (){
