@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private GameSession sessionManager;
+    public GameSession sessionManager;
     private Rigidbody2D playerBody;   
     private CapsuleCollider2D playerBodyCollider;
     private BoxCollider2D playerFeetCollider;    
@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpSpeed = 2f;
     
     private bool isAlive = true;
+    private bool isExiting = false;
     private void Awake() {
         sessionManager = FindObjectOfType<GameSession>();
         playerBody = gameObject.GetComponent<Rigidbody2D>();
@@ -53,10 +54,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
        if (!isAlive){ return;}
+       if (!isExiting){
         Run();
         FlipSprite();
         Climb();
-        Die();             
+        Die();
+       }
     }
 
     private void OnMove(InputValue value){
@@ -129,13 +132,20 @@ public class PlayerMovement : MonoBehaviour
 
 
     private void OnFire(){
-        if (isAlive){
+        
+        if (isAlive && sessionManager.HasAmmo()){
             Vector3 spawnLocation = new Vector3(transform.localPosition.x + bulletSpawn.x, transform.localPosition.y + bulletSpawn.y, 0f);
-            Instantiate(bulletCoin, spawnLocation, new Quaternion());        
+            Instantiate(bulletCoin, spawnLocation, new Quaternion());
+            sessionManager.DecrementAmmo();        
         } else {
             return;
         }
     }
 
+    public void ToggleIsExiting () {
+        isExiting = true;
+        playerBody.velocity = new Vector2(0f,0f);
+        playerAnimator.SetBool("isRunning", false);
+    }
 
 }

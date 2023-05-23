@@ -21,6 +21,7 @@ public class GameSession : MonoBehaviour
         }else {
             //Else set the created object to be Persistent through loads
             DontDestroyOnLoad(gameObject);
+            Debug.Log("Total Ammo: " + ammoRemaining);
         }
     }
    public IEnumerator ProcessPlayerDeath(){
@@ -49,5 +50,17 @@ public class GameSession : MonoBehaviour
     //Destroy this instance of GameSession as it is "complete" when the player runs out of lives
     //This method will only be called when wanting to COMPLETELY start over
     Destroy(gameObject);
+   }
+
+   public void IncrementAmmo () {
+    ammoRemaining ++;    
+   }
+
+   public void DecrementAmmo (){
+    ammoRemaining --;    
+   }
+
+   public bool HasAmmo (){
+        return ammoRemaining >= 1;
    }
 }

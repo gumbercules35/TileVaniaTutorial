@@ -5,15 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class LevelExit : MonoBehaviour
 {
-   private float loadDelay = 1.5f;
+    [SerializeField] private AudioClip exitSound;
+   private float loadDelay = 4f;
    private void OnTriggerEnter2D(Collider2D other) {
     if(other.tag == "Player"){
+        other.gameObject.GetComponent<PlayerMovement>().ToggleIsExiting();
         StartCoroutine(LoadNextLevel());       
     }
    }
 
    private IEnumerator LoadNextLevel(){
-        Debug.Log("Loading");
+        AudioSource.PlayClipAtPoint(exitSound, transform.localPosition);
         yield return new WaitForSecondsRealtime(loadDelay);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
