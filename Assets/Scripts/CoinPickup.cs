@@ -12,7 +12,7 @@ public class CoinPickup : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player"){
             other.gameObject.GetComponent<PlayerMovement>().sessionManager.IncrementAmmo();
-            AudioSource.PlayClipAtPoint(collectSound, transform.localPosition);
+            AudioSource.PlayClipAtPoint(collectSound, Camera.main.transform.position);
             Destroy(gameObject);
         }
     }

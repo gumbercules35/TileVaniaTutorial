@@ -3914,18 +3914,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2069262675824335229, guid: d605c86e1d2999d41ba9de9ff3c4333a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 13.0364485
-      objectReference: {fileID: 0}
-    - target: {fileID: 2069262675824335229, guid: d605c86e1d2999d41ba9de9ff3c4333a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.48517
-      objectReference: {fileID: 0}
-    - target: {fileID: 2069262675824335234, guid: d605c86e1d2999d41ba9de9ff3c4333a, type: 3}
-      propertyPath: orthographic size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2069262676225522690, guid: d605c86e1d2999d41ba9de9ff3c4333a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3974,14 +3962,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cameras
       objectReference: {fileID: 0}
-    - target: {fileID: 2069262676266002112, guid: d605c86e1d2999d41ba9de9ff3c4333a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 10.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 2069262676266002112, guid: d605c86e1d2999d41ba9de9ff3c4333a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.4559999
-      objectReference: {fileID: 0}
     - target: {fileID: 2069262676266002113, guid: d605c86e1d2999d41ba9de9ff3c4333a, type: 3}
       propertyPath: m_Follow
       value: 
@@ -4006,14 +3986,6 @@ PrefabInstance:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 1262512136}
-    - target: {fileID: 2069262676846652962, guid: d605c86e1d2999d41ba9de9ff3c4333a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 10.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 2069262676846652962, guid: d605c86e1d2999d41ba9de9ff3c4333a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.428
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d605c86e1d2999d41ba9de9ff3c4333a, type: 3}
 --- !u!1001 &4895400104539313354
