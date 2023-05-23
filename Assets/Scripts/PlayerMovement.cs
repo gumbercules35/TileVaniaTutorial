@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public GameSession sessionManager;
+    private GameSession sessionManager;
     private Rigidbody2D playerBody;   
     private CapsuleCollider2D playerBodyCollider;
     private BoxCollider2D playerFeetCollider;    
@@ -26,7 +26,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isAlive = true;
     private bool isExiting = false;
     private void Awake() {
-        sessionManager = FindObjectOfType<GameSession>();
+        sessionManager = GameObject.FindWithTag("GameController").GetComponent<GameSession>();
+        
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
         playerSprite.color = Color.white;
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
        if (!isAlive){ return;}
        if (!isExiting){
+        
         Run();
         FlipSprite();
         Climb();

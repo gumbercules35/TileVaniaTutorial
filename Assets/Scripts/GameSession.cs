@@ -6,8 +6,8 @@ using TMPro;
 
 public class GameSession : MonoBehaviour
 {   
-    [SerializeField] private int playerLives = 3;
-    [SerializeField] private int ammoRemaining;
+    [SerializeField]public int playerLives = 3 ;
+    private int ammoRemaining;
     private int totalScore;
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -18,21 +18,24 @@ public class GameSession : MonoBehaviour
     //DEBUG VARIABLES
     
     //DEBUG VARIABLES
-    private void Awake() {
+    private void Awake() {        
+        //Singleton Logic
         //Find out how many gameSessions we currently have
         int gameSessionCount = FindObjectsOfType<GameSession>().Length;
         //If another instance of GameSession exists, this created instance shouldnt as it is not
         //the ORIGINAL instance so destroy
-        if (gameSessionCount > 1){
+        if (gameSessionCount > 1){            
             Destroy(gameObject);
         }else {
-            //Else set the created object to be Persistent through loads
+            //Else set the created object to be Persistent through loads            
             DontDestroyOnLoad(gameObject);
-            Debug.Log("Total Ammo: " + ammoRemaining);
+            
+            
         }
     }
 
     private void Start() {
+        
         livesText.text = "Lives:" + playerLives.ToString();
         scoreText.text = "Score:" + totalScore.ToString();
         ammoText.text = "Ammo:" + ammoRemaining.ToString();
@@ -48,20 +51,16 @@ public class GameSession : MonoBehaviour
         }
    }
 
-   private void TakeLifeAndReload(){
-    playerLives --;
-    livesText.text = "Lives:" + playerLives.ToString();
-    if (playerLives <= 0){
-        ResetGameSession();
-    } else {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+   private void TakeLifeAndReload(){      
+    playerLives--;
+    int currentSceneIndex =SceneManager.GetActiveScene().buildIndex;    
+    livesText.text = "Lives:" + playerLives.ToString();   
+    SceneManager.LoadScene(currentSceneIndex);
    }
 
    private void ResetGameSession(){
     //Kick off the load to the first scene in the build index
     SceneManager.LoadScene(0);
-
     //Destroy this instance of GameSession as it is "complete" when the player runs out of lives
     //This method will only be called when wanting to COMPLETELY start over
     Destroy(gameObject);

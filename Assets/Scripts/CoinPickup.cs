@@ -18,7 +18,7 @@ public class CoinPickup : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player" && !hasTriggered){
             hasTriggered = true;
-            other.gameObject.GetComponent<PlayerMovement>().sessionManager.IncrementAmmoAndScore(ammoValue, coinValue);
+            FindObjectOfType<GameSession>().IncrementAmmoAndScore(ammoValue, coinValue);
             AudioSource.PlayClipAtPoint(collectSound, Camera.main.transform.position);
             Destroy(gameObject);
         }
