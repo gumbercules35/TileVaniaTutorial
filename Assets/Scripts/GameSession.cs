@@ -13,7 +13,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI ammoText;
 
-    private float deathDelay = 2.5f;
+    private float deathDelay = 2.5f;   
 
     //DEBUG VARIABLES
     
@@ -35,7 +35,8 @@ public class GameSession : MonoBehaviour
     private void Start() {        
         livesText.text = "Lives:" + playerLives.ToString();
         scoreText.text = "Score:" + totalScore.ToString();
-        ammoText.text = "Ammo:" + ammoRemaining.ToString();        
+        ammoText.text = "Ammo:" + ammoRemaining.ToString();     
+         
     }
 
 
@@ -57,6 +58,9 @@ public class GameSession : MonoBehaviour
    }
 
    private void ResetGameSession(){
+    //As GameSession is Persistent, the reference cannot be set in start, as it needs to be dynamic and
+    //Start is only called ONCE during the lifetime of a gameObject
+    GameObject.FindWithTag("ScenePersist").GetComponent<ScenePersist>().ResetScenePersist();
     //Kick off the load to the first scene in the build index
     SceneManager.LoadScene(0);
     //Destroy this instance of GameSession as it is "complete" when the player runs out of lives
