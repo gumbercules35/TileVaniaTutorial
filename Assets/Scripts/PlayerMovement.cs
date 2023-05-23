@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isAlive = true;
     private bool isExiting = false;
     private void Awake() {
+        //Storing a reference to the GameSession here with FindObjectOfType leads to weird errors, this seems to fix it
         sessionManager = GameObject.FindWithTag("GameController").GetComponent<GameSession>();
         
         playerBody = gameObject.GetComponent<Rigidbody2D>();
@@ -55,8 +56,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
        if (!isAlive){ return;}
-       if (!isExiting){
-        
+       if (!isExiting){        
         Run();
         FlipSprite();
         Climb();
