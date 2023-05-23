@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private GameSession sessionManager;
     private Rigidbody2D playerBody;   
     private CapsuleCollider2D playerBodyCollider;
     private BoxCollider2D playerFeetCollider;    
@@ -23,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     
     private bool isAlive = true;
     private void Awake() {
-
+        sessionManager = FindObjectOfType<GameSession>();
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
         playerSprite.color = Color.white;
@@ -51,12 +53,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
        if (!isAlive){ return;}
-
         Run();
         FlipSprite();
         Climb();
-        Die();
-             
+        Die();             
     }
 
     private void OnMove(InputValue value){
@@ -116,23 +116,22 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Die() {
-
         if (playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Spikes")))
         {
-        playerAnimator.SetTrigger("Death");
-        playerBodyCollider.enabled = false;
-        playerBody.velocity = new Vector2(0f, jumpSpeed / 1.5f);
-        playerSprite.color = Color.red;          
-
-        
-        isAlive = false;
+            playerAnimator.SetTrigger("Death");
+            playerBodyCollider.enabled = false;
+            playerBody.velocity = new Vector2(0f, jumpSpeed / 1.5f);
+            playerSprite.color = Color.red;                      
+            isAlive = false;
+            StartCoroutine(sessionManager.ProcessPlayerDeath());
         }
     }
 
+
     private void OnFire(){
         if (isAlive){
-        Vector3 spawnLocation = new Vector3(transform.localPosition.x + bulletSpawn.x, transform.localPosition.y + bulletSpawn.y, 0f);
-        Instantiate(bulletCoin, spawnLocation, new Quaternion());        
+            Vector3 spawnLocation = new Vector3(transform.localPosition.x + bulletSpawn.x, transform.localPosition.y + bulletSpawn.y, 0f);
+            Instantiate(bulletCoin, spawnLocation, new Quaternion());        
         } else {
             return;
         }
