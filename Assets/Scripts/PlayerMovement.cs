@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private GameSession sessionManager;
+    public GameSession sessionManager;
     private Rigidbody2D playerBody;   
     private CapsuleCollider2D playerBodyCollider;
     private BoxCollider2D playerFeetCollider;    

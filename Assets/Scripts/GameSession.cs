@@ -28,19 +28,17 @@ public class GameSession : MonoBehaviour
             Destroy(gameObject);
         }else {
             //Else set the created object to be Persistent through loads            
-            DontDestroyOnLoad(gameObject);
-            
-            
+            DontDestroyOnLoad(gameObject);            
         }
     }
 
-    private void Start() {
-        
+    private void Start() {        
         livesText.text = "Lives:" + playerLives.ToString();
         scoreText.text = "Score:" + totalScore.ToString();
-        ammoText.text = "Ammo:" + ammoRemaining.ToString();
-        
+        ammoText.text = "Ammo:" + ammoRemaining.ToString();        
     }
+
+
    public IEnumerator ProcessPlayerDeath(){
         yield return new WaitForSecondsRealtime(deathDelay);
         if (playerLives > 1) {
@@ -70,9 +68,7 @@ public class GameSession : MonoBehaviour
     ammoRemaining += ammoValue;   
     ammoText.text = "Ammo:" + ammoRemaining.ToString();
     totalScore += scoreValue;
-    scoreText.text = "Score:" + totalScore.ToString(); 
-
-    
+    scoreText.text = "Score:" + totalScore.ToString();     
    }
 
    public void DecrementAmmo (){

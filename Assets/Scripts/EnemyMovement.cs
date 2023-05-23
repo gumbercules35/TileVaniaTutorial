@@ -13,11 +13,7 @@ public class EnemyMovement : MonoBehaviour
         enemyRigidBody = gameObject.GetComponent<Rigidbody2D>();
         edgeDetector = gameObject.GetComponent<BoxCollider2D>();
     }
-    void Start()
-    {
-        
-    }
-
+    
    
     void Update()
     {
