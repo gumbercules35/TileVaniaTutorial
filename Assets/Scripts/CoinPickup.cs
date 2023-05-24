@@ -11,7 +11,7 @@ public class CoinPickup : MonoBehaviour
     private bool hasTriggered = false;
 
     private void Start() {
-        coinValue = Random.Range(10,100);
+        coinValue = (Random.Range(1,10) * 10) ;
         ammoValue = coinValue / 10;
         
     }
